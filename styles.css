@@ -1,0 +1,100 @@
+body{
+    font-family: monospace;
+    text-align: center; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.top-container{
+    background: linear-gradient(to bottom, #00b4ff 0%, #6dd5fa 100%);
+    flex-grow: 1;
+}
+
+.cloud-container{
+    width: 100%;
+    z-index: 1;
+}
+
+.cloud{
+    position: absolute;
+    background-image: url(assets/cloud2.webp);
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: float 30s infinite linear;
+}
+
+.cloud:nth-child(1){
+    width: 100px;
+    height: 150px;
+    animation-duration: 35s;
+    animation-direction: reverse;
+}
+.cloud:nth-child(2){
+    width: 160px;
+    height: 200px;
+    top: 10%;
+    animation-duration: 45s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateX(-110%) translateY(0);
+    }
+    50%{
+        transform: translateX(-55%) translateY(-10px);
+    }
+    100%{
+        transform: translateX(1000%) translateY(0);
+    }
+}
+
+.top-content{
+    z-index: 1000;
+}
+
+#paragraph{
+    background-color: hsla(210, 4%, 89%, 0.4);
+    margin: 9px 40apx;
+}
+
+
+.bottom-container{
+    background-image: linear-gradient(#4e93d4, #08255a) ;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+}
+
+#textInput{
+    height: 3rem;
+    width: calc(100vw - 20rem);
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 5px;
+}
+
+.current-word{
+    background-color: rgb(170, 230, 248);
+}
+
+.correct{
+    color: #4CAF50;
+}
+.incorrect{
+    color: #f44336;
+}
+
+#restart{
+    width: 8rem;
+    height: 2rem;
+    margin: 0 auto;
+}
