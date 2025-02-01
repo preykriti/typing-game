@@ -66,7 +66,7 @@ function handleInput(e){
   }
 }
 
-async function initTest() {
+async function startTest() {
   startTime =null;
   errorCount = 0;
   clearInterval(timerInterval);
@@ -83,9 +83,5 @@ async function initTest() {
   
 }
 textInput.addEventListener('input', handleInput);
-initTest();
-console.log(getParagraph());
-
-// restart.addEventListener("click", ()=>{
-//     getParagraph();
-// })
+startTest();
+restart.addEventListener('click', startTest())
