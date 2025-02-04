@@ -5,6 +5,7 @@ const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
 const timer = document.getElementById("timer");
 
+
 let quoteText = '';
 let startTime = null;
 let timerInterval = null;
@@ -13,7 +14,7 @@ let errorCount = 0;
 async function getParagraph(){
     try {
       const response = await fetch(
-        "http://api.quotable.io/random?minLength=300"
+        "http://api.quotable.io/random?minLength=200"
       );
       const data = await response.json();
       return data.content;
@@ -84,4 +85,6 @@ async function startTest() {
 }
 textInput.addEventListener('input', handleInput);
 startTest();
-restart.addEventListener('click', startTest())
+restart.addEventListener('click', startTest)
+
+// ! game mode
