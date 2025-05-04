@@ -104,7 +104,8 @@ body {
 }
 .stats{
     white-space: nowrap;
-    flex: 2;
+    width: 150px;
+    flex: 0 0 auto;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -122,6 +123,7 @@ body {
 }
 .buttons{
     display: flex;
+    width: 150px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -131,8 +133,9 @@ body {
     
 }
 button:hover{
-    opacity: 1;
+    /* opacity: 1; */
     transform: translateY(2px);
+    box-shadow: 0px 2px black;
 }
 button{
     width: 6rem;
@@ -143,6 +146,7 @@ button{
     color: white;
     font-family: monospace;
     opacity: 0.8;
+    box-shadow: 0px 5px 0 #040652;
 }
 #paragraph {
   background-color: hsla(210, 4%, 89%, 0.4);
@@ -176,7 +180,7 @@ h3, p{
 }
 
 .current-word {
-  background-color: rgb(171, 201, 6);
+  background-color: rgb(6, 113, 201);
 }
 
 .correct {
@@ -186,6 +190,5 @@ h3, p{
   color: #c9392f;
 }
 
-/* !game mode */
 
 

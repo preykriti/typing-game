@@ -4,12 +4,16 @@ const wpm = document.getElementById("wpm");
 const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
 const timer = document.getElementById("timer");
+const gameModeBtn = document.getElementById("game-mode");
 
-
+let activeWords = [];
 let quoteText = '';
 let startTime = null;
 let timerInterval = null;
 let errorCount = 0;
+
+let fallingWords = [];
+let lives = 3;
 
 async function getParagraph(){
     try {
@@ -19,7 +23,7 @@ async function getParagraph(){
       const data = await response.json();
       return data.content;
     } catch (error) {
-      return "The quick brown fox jumps over the lazy dog. This is a fallback text in case the API fails to respond. Please try again later.";
+      return "The quick brown fox jumps over the lazy dog. The API has failed. Please try again later.";
     }
 }
 
