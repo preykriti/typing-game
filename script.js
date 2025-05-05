@@ -5,6 +5,7 @@ const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
 const timer = document.getElementById("timer");
 const gameModeBtn = document.getElementById("game-mode");
+const fallingWordsDiv = document.getElementById("falling-words");
 
 let activeWords = [];
 let quoteText = '';
@@ -12,8 +13,12 @@ let startTime = null;
 let timerInterval = null;
 let errorCount = 0;
 
+let gameMode = false;
 let fallingWords = [];
 let lives = 3;
+
+
+
 
 async function getParagraph(){
     try {
@@ -44,30 +49,36 @@ function handleInput(e){
     startTime = Date.now();
     timerInterval = setInterval(updateStats, 1000);
   }
-  const quoteSpans = document.querySelectorAll('#paragraph span');
-  const inputValue = e.target.value.split('');
-  let newErrorCount = 0;
+  
+  if(gameMode){
+    if(e.key="Space"){
+      
+    }
+  }
+  else{
+    const quoteSpans = document.querySelectorAll("#paragraph span");
+    const inputValue = e.target.value.split("");
+    let newErrorCount = 0;
 
-  quoteSpans.forEach((span, index)=>{
-    const inputChar = inputValue[index];
-    if(!inputChar){
-      span.classList.remove('correct', 'incorrect');
-    }
-    else if(inputChar == span.innerText){
-      span.classList.add('correct');
-      span.classList.remove('incorrect');
-    }
-    else{
-      span.classList.add('incorrect');
-      span.classList.remove('correct');
-      newErrorCount++;
-    }
-  });
-  errorCount= newErrorCount;
+    quoteSpans.forEach((span, index) => {
+      const inputChar = inputValue[index];
+      if (!inputChar) {
+        span.classList.remove("correct", "incorrect");
+      } else if (inputChar == span.innerText) {
+        span.classList.add("correct");
+        span.classList.remove("incorrect");
+      } else {
+        span.classList.add("incorrect");
+        span.classList.remove("correct");
+        newErrorCount++;
+      }
+    });
+    errorCount = newErrorCount;
 
-  if(inputValue.length === quoteText.length){
-    clearInterval(timerInterval);
-    textInput.disabled = true;
+    if (inputValue.length === quoteText.length) {
+      clearInterval(timerInterval);
+      textInput.disabled = true;
+    }
   }
 }
 
@@ -91,4 +102,4 @@ textInput.addEventListener('input', handleInput);
 startTest();
 restart.addEventListener('click', startTest)
 
-// ! game mode
+
