@@ -5,96 +5,96 @@
 }
 
 body {
-  font-family:monospace;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-family:'Courier New', Courier, monospace;
+  text-align: center;
 }
+
+.container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+   background: 
+                linear-gradient(to bottom, 
+                    rgba(135, 206, 235, 0.8) 0%,    /* Sky blue with transparency */
+                    rgba(152, 216, 232, 0.8) 25%,   /* Light blue with transparency */
+                    rgba(176, 224, 230, 0.8) 41%,   /* Powder blue with transparency */
+                    rgba(6, 131, 189, 0.8) 46%,    /* Horizon with transparency */
+                    rgba(0, 119, 170, 0.8) 55%,     /* Surface blue with transparency */
+                    rgba(0, 85, 119, 0.8) 75%,      /* Medium blue with transparency */
+                    rgba(0, 51, 68, 0.8) 89%,       /* Dark blue with transparency */
+                    rgba(0, 17, 34, 0.8) 100%       /* Deep dark blue with transparency */
+                ),
+                url('./assets/scrunched-paper3.png');
+                background-size: cover;
+            background-position: center;
+            /* background-blend-mode: multiply; */
+}
+
+.wave-horizon{
+  position: absolute;
+  top:46%;
+  width: 100%;
+  height: 70px;
+  transform: translateY(-35px);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.wave{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  z-index: 5;
+}
+
+.wave-1 {
+  height: 50px;
+  /* background-color: rgba(67, 145, 179, 0.8); */
+  background-color: rgb(68, 149, 184,0.5);
+
+  animation: wave 4s ease-in-out infinite;
+  animation-delay: 0s;
+}
+.wave-2 {
+  height: 40px;
+  /* background-color: rgba(79, 162, 197, 0.5); */
+  background-color:rgba(41, 142, 182, 0.3);
+  animation: wave 3s ease-in-out infinite;
+  animation-delay: -1.3s;
+}
+
+@keyframes wave {
+  0%, 100% {
+      transform: translateY(0) scale(1.1, 1);
+      border-radius: 10% 50% 40% 50%;
+  }
+  50% {
+      transform: translateY(-19px) scale(1, 1.1);
+      border-radius: 50% 40% 50% 40%;
+      
+  }
+}
+
+/* content */
 
 .title {
   margin: 8px 0;
   color: white;
+  text-shadow: 2px 2px #040652;
+
 }
 
 .top-container {
-  background: linear-gradient(to bottom, #00b4ff 0%, #6dd5fa 100%);
-  /* flex-grow: 1; */
   width: 100%;
   padding-bottom: 1.5rem;
-  /* min-height: 34vh; */
-}
-
-.cloud-container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.cloud {
-  position: absolute;
-  background-image: url(assets/Group_1.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  animation: float infinite linear;
-  opacity: 0.9;
-}
-
-.cloud:nth-child(1) {
-  width: 100px;
-  height: 200px;
-  top: 10%;
-  animation-duration: 105s;
-}
-.cloud:nth-child(2) {
-  width: 100px;
-  height: 150px;
-  top: 9%;
-  background-image: url(assets/cloud3.png);
-  animation-duration: 190s;
-  animation-direction: reverse;
-}
-.cloud:nth-child(3) {
-  width: 60px;
-  height: 100px;
-  top: 20%;
-  animation-duration: 110s;
-}
-.cloud:nth-child(4) {
-  width: 100px;
-  height: 150px;
-  animation-duration: 105s;
-  animation-direction: reverse;
-}
-.cloud:nth-child(5) {
-  width: 100px;
-  height: 150px;
-  top: 2%;
-  animation-duration: 170s;
-}
-.cloud:nth-child(6) {
-  width: 90px;
-  height: 100px;
-  top: 22%;
-  background-image: url(assets/cloud3.png);
-  animation-duration: 110s;
-  animation-direction: reverse;
-}
-
-@keyframes float {
-  0% {
-    transform: translateX(-110%) translateY(0);
-  }
-  50% {
-    transform: translateX(550%) translateY(-10px);
-  }
-  100% {
-    transform: translateX(1370%) translateY(0);
-  }
 }
 
 .top-content {
@@ -165,16 +165,89 @@ button{
   color: #08255a;
 }
 
-.bottom-container {
+.cloud-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  background-image: url(assets/use-cloud44.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: float infinite linear;
+  opacity: 0.9;
+}
+
+.cloud:nth-child(1) {
+  width: 150px;
+  height: 200px;
+  top: 10%;
+  animation-duration: 105s;
+}
+.cloud:nth-child(2) {
+  width: 160px;
+  height: 150px;
+  top: 9%;
+  background-image: url(assets/use-cloud33.png);
+  animation-duration: 190s;
+  animation-direction: reverse;
+}
+.cloud:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  top: 20%;
+  background-image: url(assets/use-cloud22.png);
+  animation-duration: 110s;
+}
+.cloud:nth-child(4) {
+  width: 160px;
+  height: 150px;
+  animation-duration: 105s;
+  animation-direction: reverse;
+}
+.cloud:nth-child(5) {
+  width: 160px;
+  height: 150px;
+  background-image: url(assets/use-cloud33.png);
+  top: 2%;
+  animation-duration: 170s;
+}
+.cloud:nth-child(6) {
+  width: 150px;
+  height: 100px;
+  top: 22%;
+  background-image: url(assets/use-cloud11.png);
+  animation-duration: 110s;
+  animation-direction: reverse;
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(-110%) translateY(0);
+  }
+  50% {
+    transform: translateX(550%) translateY(-10px);
+  }
+  100% {
+    transform: translateX(1370%) translateY(0);
+  }
+}
+
+
+/* !bottom */
+/* .bottom-container {
   background-image: linear-gradient(#4e93d4, #08255a);
   min-height: 0;
   flex-grow: 3;
-}
+} */
 
 #textInput {
   height: 3rem;
   width: 100%;
-  margin: none;
   outline: none;
   border: none;
   border-radius: 0.5rem;
@@ -188,7 +261,6 @@ button{
 .incorrect {
   color: #c9392f;
 }
-
 
 
 

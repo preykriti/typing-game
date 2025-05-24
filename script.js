@@ -1,23 +1,21 @@
 const paragraph = document.getElementById("paragraph");
 const textInput = document.getElementById("textInput");
+const timer = document.getElementById("timer");
 const wpm = document.getElementById("wpm");
 const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
-const timer = document.getElementById("timer");
 const gameModeBtn = document.getElementById("game-mode");
 const fallingWordsDiv = document.getElementById("falling-words");
 
-let activeWords = [];
 let quoteText = '';
 let startTime = null;
 let timerInterval = null;
 let errorCount = 0;
 
+let activeWords = [];
 let gameMode = false;
 let fallingWords = [];
 let lives = 3;
-
-
 
 
 async function getParagraph(){

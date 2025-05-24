@@ -7,42 +7,46 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="top-container">
-      <div class="cloud-container">
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
+    <div class="container">
+      <div class="wave-horizon">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
       </div>
-      <h1 class="title">TYPE PORTAL</h1>
-      <div class="top-content">
-        <div class="stats">
-          <h3>Time: <span id="timer">0</span>s</h3>
-          <h3>WPM: <span id="wpm">0</span></h3>
-          <h3>Accuracy: <span id="accuracy">0</span>%</h3>
+      <div class="top-container">
+        <div class="cloud-container">
+          <div class="cloud"></div>
+          <div class="cloud"></div>
+          <div class="cloud"></div>
+          <div class="cloud"></div>
+          <div class="cloud"></div>
+          <div class="cloud"></div>
         </div>
-        <div class="middle-content">
-          <div class="paragraph-display"><p id="paragraph"></p></div>
+        <h1 class="title">TYPE PORTAL</h1>
+        <div class="top-content">
+          <div class="stats">
+            <h3>Time: <span id="timer">0</span>s</h3>
+            <h3>WPM: <span id="wpm">0</span></h3>
+            <h3>Accuracy: <span id="accuracy">0</span>%</h3>
+          </div>
+          <div class="middle-content">
+            <div class="paragraph-display"><p id="paragraph"></p></div>
 
-          <textarea
-            id="textInput"
-            placeholder="Type Here..."
-            spellcheck="false"
-          ></textarea>
+            <textarea
+              id="textInput"
+              placeholder="Type Here..."
+              spellcheck="false"
+            ></textarea>
+          </div>
+
+          <div class="buttons">
+            <button id="game-mode">Game mode</button>
+            <button id="restart">Restart</button>
+          </div>
         </div>
-
-        <div class="buttons">
-          <button id="game-mode">Game mode</button>
-          <button id="restart">Restart</button>
-        </div>
-
-        <div id="falling-words" style="display: none"></div>
       </div>
+      <!-- <div class="bottom-container"></div> -->
+      <div id="falling-words" style="display: none"></div>
     </div>
-    <div class="bottom-container"></div>
-
     <script src="script.js"></script>
   </body>
 </html>
