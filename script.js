@@ -107,9 +107,14 @@ async function startTest() {
   textInput.disabled = false;
   timer.textContent = '0';
   wpm.textContent = '0';
-  accuracy.textContent = '0';
+  // accuracy.textContent = '0';
 
   if(gameMode){
+      textInput.classList.add("game-mode-input");
+      accuracy.textContent = "5";
+      
+  }
+  else{
 
   }
 
@@ -120,10 +125,14 @@ async function startTest() {
   
 }
 
+
+
 function toggleGameMode(){
   gameMode = !gameMode;
   gameModeBtn.textContent = gameMode ? "Normal Mode" : "Game Mode";
   accuracyText.innerText = gameMode? "Lives:": "Accuracy:";
+
+  startTest();
 
 }
 
