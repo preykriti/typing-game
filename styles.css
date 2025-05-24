@@ -87,9 +87,10 @@ body {
 
 .title {
   margin: 8px 0;
-  color: white;
+  color: rgb(66, 158, 219);
   text-shadow: 2px 2px #040652;
-
+  position:sticky;
+  z-index: 4;
 }
 
 .top-container {
@@ -117,6 +118,14 @@ body {
     /* background-color: hsla(210, 4%, 89%, 0.4); */
 
 }
+
+
+.accuracy-container{
+  display: flex;
+  gap: 0.7rem;
+
+}
+
 .middle-content{
     /* flex: auto; */
     display: flex;
@@ -245,6 +254,15 @@ button{
   flex-grow: 3;
 } */
 
+.bottom-container{
+  /* background-color: red; */
+  height: 51%;
+  width: 100%;
+  z-index: 8;
+  position: absolute;
+  bottom: 0;
+}
+
 #textInput {
   height: 3rem;
   width: 100%;
@@ -262,6 +280,27 @@ button{
   color: #c9392f;
 }
 
+#sound-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0;
+  width: 34px;
+  height:34px;
+  border-radius: 50%;
+  /* box-shadow: none; */
+  cursor: pointer;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(135, 174, 201);
+}
+
+#sound-icon{
+  width:30px;
+  height: 30px;
+}
 
 
 @media(max-width: 400px){

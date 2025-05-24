@@ -6,13 +6,31 @@ const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
 const gameModeBtn = document.getElementById("game-mode");
 const fallingWordsDiv = document.getElementById("falling-words");
+const accuracyText = document.getElementById("accuracy-text");
+
+const audio = document.getElementById("bg-sound");
+const soundBtn = document.getElementById("sound-btn");
+const soundIcon = document.getElementById("sound-icon");
+
+let isPlaying = false;
+
+soundBtn.addEventListener("click", ()=>{
+  if(isPlaying){
+    audio.pause();
+    soundIcon.src = "./assets/play.png";
+  }
+  else{
+    audio.play();
+    soundIcon.src="./assets/pause.png";
+  }
+  isPlaying =! isPlaying;
+})
 
 let quoteText = '';
 let startTime = null;
 let timerInterval = null;
 let errorCount = 0;
 
-let activeWords = [];
 let gameMode = false;
 let fallingWords = [];
 let lives = 3;
@@ -40,6 +58,10 @@ function updateStats(){
   const typedLength = textInput.value.length;
   wpm.textContent = Math.floor((typedLength/5)/(timeElapsed/60));
   accuracy.textContent = Math.floor(((typedLength - errorCount)/typedLength)*100) || 0;
+
+  if(gameMode){
+    
+  }
 }
 
 function handleInput(e){
@@ -49,9 +71,6 @@ function handleInput(e){
   }
   
   if(gameMode){
-    if(e.key="Space"){
-      
-    }
   }
   else{
     const quoteSpans = document.querySelectorAll("#paragraph span");
@@ -90,14 +109,28 @@ async function startTest() {
   wpm.textContent = '0';
   accuracy.textContent = '0';
 
+  if(gameMode){
+
+  }
+
   quoteText = await getParagraph();
   displayParagraph(quoteText);
 
   textInput.focus();
   
 }
+
+function toggleGameMode(){
+  gameMode = !gameMode;
+  gameModeBtn.textContent = gameMode ? "Normal Mode" : "Game Mode";
+  accuracyText.innerText = gameMode? "Lives:": "Accuracy:";
+
+}
+
 textInput.addEventListener('input', handleInput);
 startTest();
 restart.addEventListener('click', startTest)
+gameModeBtn.addEventListener('click', toggleGameMode);
+
 
 

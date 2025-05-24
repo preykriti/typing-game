@@ -26,7 +26,10 @@
           <div class="stats">
             <h3>Time: <span id="timer">0</span>s</h3>
             <h3>WPM: <span id="wpm">0</span></h3>
-            <h3>Accuracy: <span id="accuracy">0</span>%</h3>
+            <div class="accuracy-container">
+              <h3 id="accuracy-text">Accuracy:</h3>
+              <h3 id="accuracy">0 Accuracy</h3>
+            </div>
           </div>
           <div class="middle-content">
             <div class="paragraph-display"><p id="paragraph"></p></div>
@@ -44,8 +47,18 @@
           </div>
         </div>
       </div>
-      <!-- <div class="bottom-container"></div> -->
+      <div class="bottom-container"></div>
+
       <div id="falling-words" style="display: none"></div>
+
+      <!-- play sea wave sound -->
+      <audio id="bg-sound" loop>
+        <source src="./assets/sea-waves.mp3" type="audio/mpeg" />
+      </audio>
+      <button id="sound-btn">
+        <img id="sound-icon" src="./assets/play.png" alt="speaker"  />
+      </button>
+
     </div>
     <script src="script.js"></script>
   </body>
