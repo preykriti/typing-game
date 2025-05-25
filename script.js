@@ -56,6 +56,12 @@ async function getParagraph(){
     }
 }
 
+function displayParagraph(par) {
+  paragraph.innerHTML = par
+    .split("")
+    .map((char) => `<span>${char}</span>`)
+    .join("");
+}
 
 async function getGameWords() {
   const text = await getParagraph();
@@ -63,9 +69,17 @@ async function getGameWords() {
   return cleanWords;
 }
 
-function displayParagraph(par){
-    paragraph.innerHTML = par.split('').map(char=> `<span>${char}</span>`).join('');
+function createFallingWord(word){
+  const wordElement = document.createElement("div");
+  wordElement.className = "falling-word";
+  wordElement.textContent = word;
+  wordElement.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
+  wordElement.style.top = "-50px";
+  
+  document.body.appendChild(wordElement);
+  return wordElement;
 }
+
 
 function updateStats(){
   const timeElapsed = (Date.now()- startTime)/1000;
@@ -157,7 +171,6 @@ function toggleGameMode(){
 }
 
 textInput.addEventListener('input', handleInput);
-
 restart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
 
