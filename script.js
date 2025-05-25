@@ -5,9 +5,15 @@ const wpm = document.getElementById("wpm");
 const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
 const gameModeBtn = document.getElementById("game-mode");
-const fallingWordsDiv = document.getElementById("falling-words");
+const fallingWordsContainer = document.getElementById("falling-words");
 const accuracyText = document.getElementById("accuracy-text");
+const paragraphDisplay = document.getElementById("paragraph-display");
+const congratulationsCard = document.getElementById("congratulations-card");
+const gameOverCard = document.getElementById("game-over-card");
 
+let quoteText = "";
+
+// !background sound
 const audio = document.getElementById("bg-sound");
 const soundBtn = document.getElementById("sound-btn");
 const soundIcon = document.getElementById("sound-icon");
@@ -24,16 +30,17 @@ soundBtn.addEventListener("click", ()=>{
     soundIcon.src="./assets/pause.png";
   }
   isPlaying =! isPlaying;
-})
+});
 
-let quoteText = '';
+// !game mode
+
 let startTime = null;
 let timerInterval = null;
 let errorCount = 0;
 
 let gameMode = false;
 let fallingWords = [];
-let lives = 3;
+let lives = 5;
 
 
 async function getParagraph(){
@@ -57,11 +64,9 @@ function updateStats(){
   timer.textContent = Math.floor(timeElapsed);
   const typedLength = textInput.value.length;
   wpm.textContent = Math.floor((typedLength/5)/(timeElapsed/60));
-  accuracy.textContent = Math.floor(((typedLength - errorCount)/typedLength)*100) || 0;
+  accuracy.textContent = `${Math.floor(((typedLength - errorCount)/typedLength)*100) || 0}%`;
 
-  if(gameMode){
-    
-  }
+  
 }
 
 function handleInput(e){
@@ -102,12 +107,19 @@ function handleInput(e){
 async function startTest() {
   startTime =null;
   errorCount = 0;
+  lives= 5;
+  score = 0;
   clearInterval(timerInterval);
+
+
   textInput.value = '';
   textInput.disabled = false;
   timer.textContent = '0';
   wpm.textContent = '0';
   // accuracy.textContent = '0';
+
+  congratulationsCard.classList.add("hidden");
+  gameOverCard.classList.add("hidden");
 
   if(gameMode){
       textInput.classList.add("game-mode-input");
@@ -115,6 +127,8 @@ async function startTest() {
       
   }
   else{
+    textInput.classList.remove("game-mode-input");
+    accuracy.textContent = `0%`
 
   }
 
@@ -131,15 +145,16 @@ function toggleGameMode(){
   gameMode = !gameMode;
   gameModeBtn.textContent = gameMode ? "Normal Mode" : "Game Mode";
   accuracyText.innerText = gameMode? "Lives:": "Accuracy:";
-
   startTest();
 
 }
 
 textInput.addEventListener('input', handleInput);
-startTest();
-restart.addEventListener('click', startTest)
+
+restart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
+
+startTest();
 
 
 

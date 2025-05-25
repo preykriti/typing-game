@@ -90,7 +90,7 @@ body {
   color: rgb(66, 158, 219);
   text-shadow: 2px 2px #040652;
   position:sticky;
-  z-index: 4;
+  z-index: 3;
 }
 
 .top-container {
@@ -167,6 +167,9 @@ button{
   align-items: center;
   min-height: 6rem;
   
+}
+.paragraph-display.hidden{
+  display: hidden;
 }
 #paragraph {
   /* margin: 0.5rem 2rem; */
@@ -254,14 +257,14 @@ button{
   flex-grow: 3;
 } */
 
-.bottom-container{
+/* .bottom-container{ */
   /* background-color: red; */
-  height: 51%;
-  width: 100%;
+  /* height: 51%; */
+  /* width: 100%; */
   /* z-index: 8; */
-  position: absolute;
-  bottom: 0;
-}
+  /* position: absolute; */
+  /* bottom: 0; */
+/* } */
 
 #textInput {
   height: 3rem;
@@ -280,7 +283,7 @@ button{
   opacity: 0.38;
   width: calc(100vw - 30rem);
   margin: 0 15rem;
-  z-index: 43;
+  z-index: 100;
   font-size: 1.1rem;
 
 }
@@ -302,7 +305,7 @@ button{
   border-radius: 50%;
   /* box-shadow: none; */
   cursor: pointer;
-  z-index: 50;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,6 +317,45 @@ button{
   height: 26px;
 }
 
+#falling-word{
+  position: absolute;
+  font-size: 1.2rem;
+  color:#040652;
+  background-color: aliceblue;
+  padding: 4px 8px;
+  border-radius: 2rem;
+  z-index: 2;
+}
+
+.hidden{
+  display: none;
+}
+
+.card{
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 500;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 30px rgba(1, 30, 43, 0.8);
+  /* border: 2px dashed rgba(0, 17, 34, 0.8) */
+}
+
+.congratulations-card{
+  background-color: rgb(52, 131, 167);
+  color: white;
+}
+
+.congratulations-card.hidden{
+  display: none;
+}
+
+.game-over-card{
+  background-color: rgb(150, 113, 71);
+  color: white;
+}
 
 @media(max-width: 400px){
   .top-content{
