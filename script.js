@@ -40,6 +40,7 @@ let errorCount = 0;
 
 let gameMode = false;
 let fallingWords = [];
+let gameWords = [];
 let lives = 5;
 
 
@@ -53,6 +54,13 @@ async function getParagraph(){
     } catch (error) {
       return "The quick brown fox jumps over the lazy dog. The API has failed. Please try again later.";
     }
+}
+
+
+async function getGameWords() {
+  const text = await getParagraph();
+  const cleanWords = text.split(" ").map(word=> word.replace.toLowerCase()).filter(word=>word.length > 0);
+  return cleanWords;
 }
 
 function displayParagraph(par){
@@ -104,13 +112,13 @@ function handleInput(e){
   }
 }
 
+
 async function startTest() {
   startTime =null;
   errorCount = 0;
   lives= 5;
   score = 0;
   clearInterval(timerInterval);
-
 
   textInput.value = '';
   textInput.disabled = false;
@@ -123,20 +131,19 @@ async function startTest() {
 
   if(gameMode){
       textInput.classList.add("game-mode-input");
+      paragraphDisplay.classList.add("hidden");
       accuracy.textContent = "5";
-      
+      gameWords = await getGameWords();
   }
   else{
     textInput.classList.remove("game-mode-input");
-    accuracy.textContent = `0%`
-
+    paragraphDisplay.classList.remove("hidden");
+    accuracy.textContent = "0%";
+    quoteText = await getParagraph();
+    displayParagraph(quoteText);
   }
 
-  quoteText = await getParagraph();
-  displayParagraph(quoteText);
-
   textInput.focus();
-  
 }
 
 

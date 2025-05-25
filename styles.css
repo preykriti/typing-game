@@ -102,8 +102,8 @@ body {
   z-index: 3;
   position: relative;
   display: flex;
-  justify-content: space-evenly;
-  gap: 3rem;
+  justify-content: space-between;
+  gap: 2rem;
   /* gap: 12px; */
 }
 .stats{
@@ -113,12 +113,11 @@ body {
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: space-between;
-    padding-left: 12px;
+    margin: 0 2rem;
     color: #0b3583;
     /* background-color: hsla(210, 4%, 89%, 0.4); */
 
 }
-
 
 .accuracy-container{
   display: flex;
@@ -127,7 +126,6 @@ body {
 }
 
 .middle-content{
-    /* flex: auto; */
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -137,9 +135,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
-    /* flex:2; */
-    padding-right: 12px;
+    gap: 4rem;
+    margin-right: 2rem;
     
 }
 button:hover{
@@ -168,9 +165,7 @@ button{
   min-height: 6rem;
   
 }
-.paragraph-display.hidden{
-  display: hidden;
-}
+
 #paragraph {
   /* margin: 0.5rem 2rem; */
   font-size: 0.9rem;
