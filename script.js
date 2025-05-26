@@ -42,7 +42,11 @@ let gameMode = false;
 let fallingWords = [];
 let gameWords = [];
 let lives = 5;
+let score = 0;
+let gameSpeed = 1;
 let currentIndex = 0;
+let wordSpawnInterval = null;
+let gameAnimation = null;
 
 
 async function getParagraph(){
@@ -66,7 +70,10 @@ function displayParagraph(par) {
 
 async function getGameWords() {
   const text = await getParagraph();
-  const cleanWords = text.split(" ").map(word=> word.replace.toLowerCase()).filter(word=>word.length > 0);
+  const cleanWords = text
+    .split(" ")
+    .map((word) => word.replace(/[.,!?;:"-_+=()]/g, "").toLowerCase())
+    .filter((word) => word.length > 0);
   return cleanWords;
 }
 
@@ -89,8 +96,8 @@ function generateWord(){
       element: wordElement,
       word: word,
       y: -50,
-      speed: 3
-
+      speed: gameSpeed,
+      hasReachedBottom: false
     });
     currentIndex ++;
 
@@ -106,19 +113,77 @@ function updateFallingWords(){
       wordObj.element.classList.add("water");
     }
 
-    if(wordObj.y > window.innerHeight - 50){
+    if(wordObj.y > window.innerHeight - 50 && !wordObj.hasReachedBottom){
+      wordObj.hasReachedBottom = true;
       lives = lives - 1;
+      console.log(`lives in update: ${lives}`);
       accuracy.textContent = lives;
       
       setTimeout(()=>{
         wordObj.element.remove();
         fallingWords.splice(index,1);
       }, 500);
+
+      if(lives <=0){
+        endGameWithFailure();
+      }
     }
 
   })
 }
 
+function checkTypedWord(){
+  const typedWord = textInput.value.trim();
+
+  for(let i = 0; i<fallingWords.length; i++){
+    const wordObj = fallingWords[i];
+    if(wordObj.word === typedWord){
+      score++;
+      wordObj.element.classList.add("matched");
+      textInput.value = '';
+
+      setTimeout(()=>{
+        wordObj.element.remove();
+        fallingWords.splice(i,1);
+      }, 200);
+
+      if(score>=gameWords.length){
+        endGameWithSuccess();
+        return;
+      }
+
+      gameSpeed +=0.1;
+      break;
+    }
+  }
+}
+
+function gameLoop(){
+  if(gameMode && lives >0){
+    updateFallingWords();
+    gameAnimation = requestAnimationFrame(gameLoop);
+  }
+}
+
+function clearAll(){
+  clearInterval(timerInterval);
+  clearInterval(wordSpawnInterval);
+  cancelAnimationFrame(gameAnimation);
+}
+
+function endGameWithSuccess(){
+  clearAll();
+  textInput.disabled=true;
+  congratulationsCard.classList.remove('hidden');
+  fallingWords.forEach((wordObj)=> wordObj.element.remove());
+  fallingWords=[];
+}
+
+function endGameWithFailure(){
+  clearAll();
+  textInput.disabled = true;
+
+}
 
 function updateStats(){
   const timeElapsed = (Date.now()- startTime)/1000;
@@ -131,12 +196,16 @@ function updateStats(){
 }
 
 function handleInput(e){
-  if(!startTime){
+  if(!startTime && !gameMode){
     startTime = Date.now();
     timerInterval = setInterval(updateStats, 1000);
   }
   
   if(gameMode){
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      checkTypedWord();
+    }
   }
   else{
     const quoteSpans = document.querySelectorAll("#paragraph span");
@@ -165,13 +234,26 @@ function handleInput(e){
   }
 }
 
+function startGameMode(){
+  startTime = Date.now();
+  timerInterval = setInterval(updateStats, 1000);
+  gameLoop();
+  wordSpawnInterval = setInterval(generateWord, 2000);
+}
+
 
 async function startTest() {
   startTime =null;
   errorCount = 0;
   lives= 5;
   score = 0;
-  clearInterval(timerInterval);
+  currentIndex= 0;
+  gameSpeed = 1;
+  fallingWords = [];
+
+  clearAll();
+
+  fallingWords.forEach(wordObj => wordObj.element.remove());
 
   textInput.value = '';
   textInput.disabled = false;
@@ -184,9 +266,11 @@ async function startTest() {
 
   if(gameMode){
       textInput.classList.add("game-mode-input");
+      console.log("inside startTest");
       paragraphDisplay.classList.add("hidden");
       accuracy.textContent = "5";
       gameWords = await getGameWords();
+      startGameMode();
   }
   else{
     textInput.classList.remove("game-mode-input");
@@ -209,11 +293,18 @@ function toggleGameMode(){
 
 }
 
+startTest();
+
 textInput.addEventListener('input', handleInput);
+textInput.addEventListener("keydown", handleInput);
 restart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
 
-startTest();
+textInput.addEventListener("paste", (e) => {
+  e.preventDefault();
+});
+
+
 
 
 

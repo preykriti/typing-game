@@ -129,6 +129,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+    width: 100vw;
 }
 .buttons{
     display: flex;
@@ -261,7 +262,7 @@ button{
   /* bottom: 0; */
 /* } */
 
-#textInput {
+.textInput {
   height: 3rem;
   width: 100%;
   outline: none;
@@ -271,16 +272,16 @@ button{
   opacity: 0.8;
 }
 
-#textInput.game-mode-input{
+.textInput.game-mode-input{
   position: fixed;
-  bottom: 0;
-  left: 0;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0.38;
-  width: calc(100vw - 30rem);
-  margin: 0 15rem;
+  max-width: 850px;
+  /* margin: 0 15rem; */
   z-index: 100;
   font-size: 1.1rem;
-
 }
 
 .correct {
@@ -312,7 +313,7 @@ button{
   height: 26px;
 }
 
-#falling-word{
+.falling-word{
   position: absolute;
   font-size: 1.2rem;
   color:#040652;
