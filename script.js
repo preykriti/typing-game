@@ -42,6 +42,7 @@ let gameMode = false;
 let fallingWords = [];
 let gameWords = [];
 let lives = 5;
+let currentIndex = 0;
 
 
 async function getParagraph(){
@@ -69,7 +70,7 @@ async function getGameWords() {
   return cleanWords;
 }
 
-function createFallingWord(word){
+function createFallingWordDiv(word){
   const wordElement = document.createElement("div");
   wordElement.className = "falling-word";
   wordElement.textContent = word;
@@ -78,6 +79,44 @@ function createFallingWord(word){
   
   document.body.appendChild(wordElement);
   return wordElement;
+}
+
+function generateWord(){
+  if(currentIndex < gameWords.length && lives > 0){
+    const word = gameWords[currentIndex];
+    const wordElement = createFallingWordDiv(word);
+    fallingWords.push({
+      element: wordElement,
+      word: word,
+      y: -50,
+      speed: 3
+
+    });
+    currentIndex ++;
+
+  }
+}
+
+function updateFallingWords(){
+  fallingWords.forEach((wordObj, index)=>{
+    wordObj.y = wordObj.y + wordObj.speed;
+    wordObj.element.style.top = `${wordObj.y}px`;
+
+    if(wordObj.y > window.innerHeight * 0.5 && !wordObj.element.classList.contains('water')){
+      wordObj.element.classList.add("water");
+    }
+
+    if(wordObj.y > window.innerHeight - 50){
+      lives = lives - 1;
+      accuracy.textContent = lives;
+      
+      setTimeout(()=>{
+        wordObj.element.remove();
+        fallingWords.splice(index,1);
+      }, 500);
+    }
+
+  })
 }
 
 
