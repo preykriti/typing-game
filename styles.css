@@ -18,6 +18,7 @@ body {
   height: 100%;
   width: 100%;
   position: relative;
+  z-index: 1;
 
    background: 
                 linear-gradient(to bottom, 
@@ -291,6 +292,27 @@ button{
   color: #c9392f;
 }
 
+.rock{
+  width: 300px;
+  position: absolute;
+  bottom: -85px;
+  right: -80px;
+  transform: rotate(20deg);
+  z-index: -2;
+  /* opacity: 0.5; */
+}
+
+.rock2{
+    width: 200px;
+    position: absolute;
+    bottom: -45px;
+    right: 30px;
+    transform: rotate(20deg);
+    z-index: -2;
+    /* opacity: 0.5; */
+    /* filter:saturate(50%); */
+}
+
 #sound-btn{
   position: fixed;
   bottom: 10px;
@@ -317,10 +339,15 @@ button{
   position: absolute;
   font-size: 1.2rem;
   color:#040652;
-  background-color: aliceblue;
+  background-color: rgb(237, 242, 245);
   padding: 4px 8px;
   border-radius: 2rem;
   z-index: 2;
+}
+
+.water{
+  background-color: rgb(237, 242, 245, 0.6);
+  transition: background-color 0.5s ease;
 }
 
 .hidden{
@@ -349,8 +376,8 @@ button{
 }
 
 .game-over-card{
-  background-color: rgb(150, 113, 71);
-  color: white;
+  background-color: rgb(235, 235, 235);
+  color: rgb(228, 49, 49);
 }
 
 @media(max-width: 400px){

@@ -72,7 +72,7 @@ async function getGameWords() {
   const text = await getParagraph();
   const cleanWords = text
     .split(" ")
-    .map((word) => word.replace(/[.,!?;:"-_+=()]/g, "").toLowerCase())
+    .map((word) => word.toLowerCase().replace(/[.,!?;:"-_+=()]/g, ""))
     .filter((word) => word.length > 0);
   return cleanWords;
 }
@@ -109,7 +109,7 @@ function updateFallingWords(){
     wordObj.y = wordObj.y + wordObj.speed;
     wordObj.element.style.top = `${wordObj.y}px`;
 
-    if(wordObj.y > window.innerHeight * 0.5 && !wordObj.element.classList.contains('water')){
+    if(wordObj.y > window.innerHeight * 0.40 && !wordObj.element.classList.contains('water')){
       wordObj.element.classList.add("water");
     }
 
@@ -118,6 +118,7 @@ function updateFallingWords(){
       lives = lives - 1;
       console.log(`lives in update: ${lives}`);
       accuracy.textContent = lives;
+      wordObj.element.classList.add("missed");
       
       setTimeout(()=>{
         wordObj.element.remove();
@@ -182,16 +183,27 @@ function endGameWithSuccess(){
 function endGameWithFailure(){
   clearAll();
   textInput.disabled = true;
-
+  gameOverCard.classList.remove("hidden");
+  fallingWords.forEach((wordObj) => wordObj.element.remove());
+  fallingWords = [];
 }
 
 function updateStats(){
   const timeElapsed = (Date.now()- startTime)/1000;
   timer.textContent = Math.floor(timeElapsed);
   const typedLength = textInput.value.length;
-  wpm.textContent = Math.floor((typedLength/5)/(timeElapsed/60));
-  accuracy.textContent = `${Math.floor(((typedLength - errorCount)/typedLength)*100) || 0}%`;
 
+
+  if(gameMode){
+    accuracy.textContent = lives;
+    wpm.textContent = Math.floor(score/(timeElapsed/60)) || 0;
+  }
+  else{
+    wpm.textContent = Math.floor(typedLength / 5 / (timeElapsed / 60));
+    accuracy.textContent = `${
+      Math.floor(((typedLength - errorCount) / typedLength) * 100) || 0
+    }%`;
+  }
   
 }
 
@@ -239,6 +251,12 @@ function startGameMode(){
   timerInterval = setInterval(updateStats, 1000);
   gameLoop();
   wordSpawnInterval = setInterval(generateWord, 2000);
+  generateWord();
+}
+
+function clearFallingWords(){
+  fallingWords.forEach(wordObj=> wordObj.element.remove());
+  fallingWords = [];
 }
 
 
@@ -249,24 +267,20 @@ async function startTest() {
   score = 0;
   currentIndex= 0;
   gameSpeed = 1;
-  fallingWords = [];
 
   clearAll();
-
-  fallingWords.forEach(wordObj => wordObj.element.remove());
+  clearFallingWords();
 
   textInput.value = '';
   textInput.disabled = false;
   timer.textContent = '0';
   wpm.textContent = '0';
-  // accuracy.textContent = '0';
 
   congratulationsCard.classList.add("hidden");
   gameOverCard.classList.add("hidden");
 
   if(gameMode){
       textInput.classList.add("game-mode-input");
-      console.log("inside startTest");
       paragraphDisplay.classList.add("hidden");
       accuracy.textContent = "5";
       gameWords = await getGameWords();
