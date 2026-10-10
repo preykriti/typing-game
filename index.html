@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,10 +7,33 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    
-    <img class="rock" src="./assets/rock1.png" alt="rock"/>
-    <img class="rock2" src="./assets/rock2.png" alt="rock"/>
     <div class="container">
+      <div class="seabed" aria-hidden="true">
+        <svg viewBox="0 0 1200 400" preserveAspectRatio="none">
+          <path
+            d="M 0 135 C 120 110, 200 160, 320 132 C 440 104, 520 148, 640 138 C 740 130, 820 110, 940 128 C 1050 144, 1130 160, 1200 142 L 1200 400 L 0 400 Z"
+            fill="#276783"
+          />
+
+          <path
+            d="M 0 178 C 60 154, 120 196, 190 180 C 260 164, 320 204, 390 184 C 470 160, 530 208, 610 188 C 690 168, 750 204, 830 186 C 910 168, 980 212, 1060 192 C 1130 176, 1170 186, 1200 180 L 1200 400 L 0 400 Z"
+            fill="#205A78"
+          />
+          <!-- <path
+            d="M 0 228 C 80 180, 200 192, 300 210 C 400 230, 480 248, 580 234 C 700 218, 800 256, 900 238 C 1000 220, 1080 248, 1200 232 L 1200 400 L 0 400 Z"
+            fill="#9c7c50"
+          /> -->
+          <path
+            d="M 0 240 C 140 213, 260 267, 400 243 C 520 223, 600 265, 720 247 C 840 231, 900 283, 1020 257 C 1120 235, 1160 255, 1200 245 L 1200 400 L 0 400 Z"
+            fill="#b7975f"
+          />
+          <path
+            d="M 0 296 C 130 266, 240 324, 370 298 C 480 276, 560 312, 690 292 C 800 274, 880 320, 1000 300 C 1100 284, 1150 306, 1200 296 L 1200 400 L 0 400 Z"
+            fill="#cdb079"
+          />
+        </svg>
+        <div class="seabed-water"></div>
+      </div>
       <div class="wave-horizon">
         <div class="wave wave-1"></div>
         <div class="wave wave-2"></div>
@@ -35,7 +58,9 @@
             </div>
           </div>
           <div class="middle-content">
-            <div id="paragraph-display" class="paragraph-display"><p id="paragraph"></p></div>
+            <div id="paragraph-display" class="paragraph-display">
+              <p id="paragraph"></p>
+            </div>
 
             <textarea
               id="textInput"
@@ -48,7 +73,9 @@
           <div class="buttons">
             <div class="length-controls">
               <button class="length-btn" data-length="short">Short</button>
-              <button class="length-btn active" data-length="medium">Medium</button>
+              <button class="length-btn active" data-length="medium">
+                Medium
+              </button>
               <button class="length-btn" data-length="long">Long</button>
             </div>
             <div class="mode-buttons">
@@ -59,13 +86,12 @@
         </div>
       </div>
 
-
       <!-- play sea wave sound -->
       <audio id="bg-sound" loop>
         <source src="./assets/sea-waves.mp3" type="audio/mpeg" />
       </audio>
       <button id="sound-btn">
-        <img id="sound-icon" src="./assets/play.png" alt="speaker"  />
+        <img id="sound-icon" src="./assets/play.png" alt="speaker" />
       </button>
     </div>
     <div class="congratulations-card card hidden" id="congratulations-card">
