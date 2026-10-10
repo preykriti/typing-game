@@ -16,6 +16,8 @@ const finalWpm = document.getElementById("final-wpm");
 const finalAccuracy = document.getElementById("final-accuracy");
 const resultRestart = document.getElementById("result-restart");
 const lengthButtons = document.querySelectorAll(".length-btn");
+const instructionCard = document.getElementById("instruction-card");
+const gameStartBtn = document.getElementById("game-start");
 
 let quoteText = "";
 
@@ -310,6 +312,7 @@ async function startTest() {
 
   congratulationsCard.classList.add("hidden");
   gameOverCard.classList.add("hidden");
+  instructionCard.classList.add("hidden");
   if (resultCard) resultCard.classList.add("hidden");
 
   if(gameMode){
@@ -336,8 +339,14 @@ function toggleGameMode(){
   gameMode = !gameMode;
   gameModeBtn.textContent = gameMode ? "Normal Mode" : "Game Mode";
   accuracyText.innerText = gameMode? "Lives:": "Accuracy:";
-  startTest();
 
+  if(gameMode){
+    clearAll();
+    instructionCard.classList.remove("hidden");
+  }
+  else{
+    startTest();
+  }
 }
 
 startTest();
@@ -346,6 +355,7 @@ textInput.addEventListener('input', handleInput);
 textInput.addEventListener("keydown", handleInput);
 restart.addEventListener('click', startTest);
 resultRestart.addEventListener('click', startTest);
+gameStartBtn.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
 
 lengthButtons.forEach((btn) => {

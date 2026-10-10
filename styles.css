@@ -483,6 +483,44 @@ button {
   color: rgb(228, 49, 49);
 }
 
+.instruction-card {
+  background-color: rgba(52, 131, 167, 0.95);
+  color: white;
+  text-align: left;
+  max-width: 440px;
+}
+
+.instruction-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color:#0f3a8a
+}
+
+.instruction-message {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.instruction-list {
+  margin: 0 0 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  line-height: 1.4;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+
+.game-start-btn {
+  display: block;
+  margin: 0 auto;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .result-card {
   background-color: rgb(52, 131, 167);
   color: white;
