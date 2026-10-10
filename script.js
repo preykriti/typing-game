@@ -15,8 +15,17 @@ const finalTime = document.getElementById("final-time");
 const finalWpm = document.getElementById("final-wpm");
 const finalAccuracy = document.getElementById("final-accuracy");
 const resultRestart = document.getElementById("result-restart");
+const lengthButtons = document.querySelectorAll(".length-btn");
 
 let quoteText = "";
+
+// sentence length control
+const lengthRanges = {
+  short: { min: 20, max: 80 },
+  medium: { min: 120, max: 180 },
+  long: { min: 250, max: 300 },
+};
+let lengthMode = "medium";
 
 // !background sound
 const audio = document.getElementById("bg-sound");
@@ -56,8 +65,9 @@ let gameAnimation = null;
 
 async function getParagraph(){
     try {
+      const { min, max } = lengthRanges[lengthMode];
       const response = await fetch(
-        "http://api.quotable.io/random?minLength=200"
+        `http://api.quotable.io/random?minLength=${min}&maxLength=${max}`
       );
       const data = await response.json();
       return data.content;
@@ -88,7 +98,6 @@ function createFallingWordDiv(word){
   wordElement.textContent = word;
   wordElement.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
   wordElement.style.top = "-50px";
-  
   document.body.appendChild(wordElement);
   return wordElement;
 }
@@ -124,7 +133,6 @@ function updateFallingWords(){
       console.log(`lives in update: ${lives}`);
       accuracy.textContent = lives;
       wordObj.element.classList.add("missed");
-      
       setTimeout(()=>{
         wordObj.element.remove();
         fallingWords.splice(index,1);
@@ -209,7 +217,6 @@ function updateStats(){
       Math.floor(((typedLength - errorCount) / typedLength) * 100) || 0
     }%`;
   }
-  
 }
 
 function showResults(){
@@ -228,7 +235,7 @@ function handleInput(e){
     startTime = Date.now();
     timerInterval = setInterval(updateStats, 1000);
   }
-  
+
   if(gameMode){
     if(e.key === "Enter" || e.key === " "){
       e.preventDefault();
@@ -332,6 +339,15 @@ textInput.addEventListener("keydown", handleInput);
 restart.addEventListener('click', startTest);
 resultRestart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
+
+lengthButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.length === lengthMode) return;
+    lengthMode = btn.dataset.length;
+    lengthButtons.forEach((b) => b.classList.toggle("active", b === btn));
+    startTest();
+  });
+});
 
 
 
