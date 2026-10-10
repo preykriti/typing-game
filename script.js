@@ -10,6 +10,11 @@ const accuracyText = document.getElementById("accuracy-text");
 const paragraphDisplay = document.getElementById("paragraph-display");
 const congratulationsCard = document.getElementById("congratulations-card");
 const gameOverCard = document.getElementById("game-over-card");
+const resultCard = document.getElementById("result-card");
+const finalTime = document.getElementById("final-time");
+const finalWpm = document.getElementById("final-wpm");
+const finalAccuracy = document.getElementById("final-accuracy");
+const resultRestart = document.getElementById("result-restart");
 
 let quoteText = "";
 
@@ -207,6 +212,17 @@ function updateStats(){
   
 }
 
+function showResults(){
+  const timeElapsed = (Date.now() - startTime) / 1000;
+  const typedLength = quoteText.length;
+  finalTime.textContent = Math.floor(timeElapsed);
+  finalWpm.textContent = Math.floor(typedLength / 5 / (timeElapsed / 60)) || 0;
+  finalAccuracy.textContent = `${
+    Math.floor(((typedLength - errorCount) / typedLength) * 100) || 0
+  }%`;
+  resultCard.classList.remove("hidden");
+}
+
 function handleInput(e){
   if(!startTime && !gameMode){
     startTime = Date.now();
@@ -242,6 +258,7 @@ function handleInput(e){
     if (inputValue.length === quoteText.length) {
       clearInterval(timerInterval);
       textInput.disabled = true;
+      showResults();
     }
   }
 }
@@ -278,6 +295,7 @@ async function startTest() {
 
   congratulationsCard.classList.add("hidden");
   gameOverCard.classList.add("hidden");
+  if (resultCard) resultCard.classList.add("hidden");
 
   if(gameMode){
       textInput.classList.add("game-mode-input");
@@ -312,11 +330,8 @@ startTest();
 textInput.addEventListener('input', handleInput);
 textInput.addEventListener("keydown", handleInput);
 restart.addEventListener('click', startTest);
+resultRestart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
-
-textInput.addEventListener("paste", (e) => {
-  e.preventDefault();
-});
 
 
 
