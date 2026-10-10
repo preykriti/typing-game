@@ -165,7 +165,6 @@ function checkTypedWord(){
     if(wordObj.word === typedWord){
       score++;
       wordObj.element.classList.add("matched");
-      textInput.value = '';
 
       setTimeout(()=>{
         removeFallingWord(wordObj);
@@ -180,6 +179,8 @@ function checkTypedWord(){
       break;
     }
   }
+
+  textInput.value = '';
 }
 
 function gameLoop(){
@@ -364,6 +365,14 @@ lengthButtons.forEach((btn) => {
     lengthMode = btn.dataset.length;
     lengthButtons.forEach((b) => b.classList.toggle("active", b === btn));
     startTest();
+  });
+});
+
+[instructionCard, congratulationsCard, gameOverCard].forEach((card) => {
+  document.addEventListener("mousedown", (e) => {
+    if (card.classList.contains("hidden")) return;
+    if (card.contains(e.target)) return;
+    card.classList.add("hidden");
   });
 });
 
