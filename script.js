@@ -18,6 +18,7 @@ const resultRestart = document.getElementById("result-restart");
 const lengthButtons = document.querySelectorAll(".length-btn");
 const instructionCard = document.getElementById("instruction-card");
 const gameStartBtn = document.getElementById("game-start");
+const gameOverRestart = document.getElementById("game-over-restart");
 
 let quoteText = "";
 
@@ -357,6 +358,7 @@ textInput.addEventListener("keydown", handleInput);
 restart.addEventListener('click', startTest);
 resultRestart.addEventListener('click', startTest);
 gameStartBtn.addEventListener('click', startTest);
+gameOverRestart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
 
 lengthButtons.forEach((btn) => {

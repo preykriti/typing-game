@@ -479,8 +479,32 @@ button {
 }
 
 .game-over-card {
-  background-color: rgb(235, 235, 235);
-  color: rgb(228, 49, 49);
+  background: linear-gradient(160deg, #0d2949, #091b32);
+  color: white;
+  text-align: center;
+}
+
+.game-over-card h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: rgb(219, 77, 77);
+}
+
+.game-over-restart-btn {
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: #fff;
+  color: #0a2647;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.game-over-restart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .instruction-card {
