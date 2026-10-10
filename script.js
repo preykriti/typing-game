@@ -337,18 +337,27 @@ async function startTest() {
 
 
 
-function toggleGameMode(){
-  gameMode = !gameMode;
+function setModeUI(){
   gameModeBtn.textContent = gameMode ? "Normal Mode" : "Game Mode";
-  accuracyText.innerText = gameMode? "Lives:": "Accuracy:";
+  accuracyText.innerText = gameMode ? "Lives:" : "Accuracy:";
+}
 
+function toggleGameMode(){
   if(gameMode){
+    gameMode = false;
+    setModeUI();
+    startTest();
+  }
+  else{
     clearAll();
     instructionCard.classList.remove("hidden");
   }
-  else{
-    startTest();
-  }
+}
+
+function startGameFromInstructions(){
+  gameMode = true;
+  setModeUI();
+  startTest();
 }
 
 startTest();
@@ -357,7 +366,7 @@ textInput.addEventListener('input', handleInput);
 textInput.addEventListener("keydown", handleInput);
 restart.addEventListener('click', startTest);
 resultRestart.addEventListener('click', startTest);
-gameStartBtn.addEventListener('click', startTest);
+gameStartBtn.addEventListener('click', startGameFromInstructions);
 gameOverRestart.addEventListener('click', startTest);
 gameModeBtn.addEventListener('click', toggleGameMode);
 
