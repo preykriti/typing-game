@@ -107,6 +107,39 @@ body {
   display: block;
 }
 
+.plants {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.plant {
+  position: absolute;
+  left: var(--left, 50%);
+  bottom: var(--bottom, 40%);
+  height: var(--h, 100px);
+  width: auto;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+}
+
+.plants-far .plant {
+  opacity: 0.32;
+  filter: blur(0.6px);
+}
+
+.plants-mid .plant {
+  opacity: 0.58;
+}
+
+.plants-near .plant {
+  opacity: 0.85;
+}
+
+.plants-front .plant {
+  opacity: 0.95;
+}
+
 .seabed-water {
   position: absolute;
   inset: 0;
@@ -211,7 +244,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* gap: 4rem; */
+  gap: 3rem;
 }
 button:hover {
   /* opacity: 1; */
