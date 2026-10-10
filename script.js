@@ -118,8 +118,19 @@ function generateWord(){
   }
 }
 
+function removeFallingWord(wordObj){
+  const index = fallingWords.indexOf(wordObj);
+  if(index !== -1){
+    fallingWords.splice(index,1);
+  }
+  wordObj.element.remove();
+}
+
 function updateFallingWords(){
-  fallingWords.forEach((wordObj, index)=>{
+  for(let i = fallingWords.length - 1; i>=0; i--){
+    const wordObj = fallingWords[i];
+    if(wordObj.hasReachedBottom) continue;
+
     wordObj.y = wordObj.y + wordObj.speed;
     wordObj.element.style.top = `${wordObj.y}px`;
 
@@ -127,23 +138,20 @@ function updateFallingWords(){
       wordObj.element.classList.add("water");
     }
 
-    if(wordObj.y > window.innerHeight - 50 && !wordObj.hasReachedBottom){
+    if(wordObj.y > window.innerHeight - 50){
       wordObj.hasReachedBottom = true;
       lives = lives - 1;
-      console.log(`lives in update: ${lives}`);
       accuracy.textContent = lives;
       wordObj.element.classList.add("missed");
       setTimeout(()=>{
-        wordObj.element.remove();
-        fallingWords.splice(index,1);
+        removeFallingWord(wordObj);
       }, 500);
 
       if(lives <=0){
         endGameWithFailure();
       }
     }
-
-  })
+  }
 }
 
 function checkTypedWord(){
@@ -151,14 +159,14 @@ function checkTypedWord(){
 
   for(let i = 0; i<fallingWords.length; i++){
     const wordObj = fallingWords[i];
+    if(wordObj.hasReachedBottom) continue;
     if(wordObj.word === typedWord){
       score++;
       wordObj.element.classList.add("matched");
       textInput.value = '';
 
       setTimeout(()=>{
-        wordObj.element.remove();
-        fallingWords.splice(i,1);
+        removeFallingWord(wordObj);
       }, 200);
 
       if(score>=gameWords.length){
