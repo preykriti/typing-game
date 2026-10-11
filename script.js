@@ -38,6 +38,13 @@ let lengthMode = "medium";
 const audio = document.getElementById("bg-sound");
 const soundBtn = document.getElementById("sound-btn");
 const soundIcon = document.getElementById("sound-icon");
+const successSound = document.getElementById("success-sound");
+const missedSound = document.getElementById("missed-sound");
+
+function playEffect(soundType){
+  soundType.currentTime = 0;
+  soundType.play().catch(()=>{});
+}
 
 let isPlaying = false;
 
@@ -162,6 +169,7 @@ function updateFallingWords(){
       wordObj.hasReachedBottom = true;
       lives = lives - 1;
       missedCount++;
+      playEffect(missedSound);
       accuracy.textContent = lives;
       wordObj.element.classList.add("missed");
       setTimeout(()=>{
@@ -183,6 +191,7 @@ function checkTypedWord(){
     if(wordObj.hasReachedBottom) continue;
     if(wordObj.word === typedWord){
       score++;
+      playEffect(successSound);
       wordObj.element.classList.add("matched");
 
       setTimeout(()=>{
