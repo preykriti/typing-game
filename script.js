@@ -30,6 +30,59 @@ const loadingIndicator = document.getElementById("loading-indicator");
 
 let quoteText = "";
 
+// swimming fish
+const FISH_SOURCES = [
+  "./assets/fish/yellow_fish.webp",
+  "./assets/fish/long_fish.webp",
+  "./assets/fish/blue_fish.webp",
+];
+
+function randomFishSource() {
+  return FISH_SOURCES[Math.floor(Math.random() * FISH_SOURCES.length)];
+}
+
+// top is relative to the seabed
+const fishConfigs = [
+  { size: 130, top: "30%", swim: 30, bob: 6.0, amp: 40, delay: -3, opacity: 0.8, blur: 0, layer: "back" },
+  { size: 112, top: "46%", swim: 34, bob: 5.6, amp: 36, delay: -14, opacity: 0.81, blur: 0, layer: "back" },
+  { size: 100, top: "-4%", swim: 38, bob: 5.0, amp: 32, delay: -21, opacity: 0.83, blur: 0.4, layer: "front" },
+  { size: 86, top: "6%", swim: 44, bob: 4.3, amp: 26, delay: -40, opacity: 0.93, blur: 0.8, layer: "front" },
+  { size: 74, top: "2%", swim: 48, bob: 4.0, amp: 22, delay: -34, opacity: 0.9, blur: 1.2, layer: "front" },
+];
+
+const fishLayers = {
+  back: document.getElementById("fish-layer-back"),
+  front: document.getElementById("fish-layer-front"),
+};
+
+function createFish(cfg) {
+  const fish = document.createElement("div");
+  fish.className = "fish";
+  fish.setAttribute("aria-hidden", "true");
+  fish.style.setProperty("--size", `${cfg.size}px`);
+  fish.style.setProperty("--top", cfg.top);
+  fish.style.setProperty("--swim", `${cfg.swim}s`);
+  fish.style.setProperty("--bob", `${cfg.bob}s`);
+  fish.style.setProperty("--amp", `${cfg.amp}px`);
+  fish.style.setProperty("--delay", `${cfg.delay}s`);
+  fish.style.setProperty("--opacity", cfg.opacity);
+  fish.style.setProperty("--blur", `${cfg.blur}px`);
+
+  const bob = document.createElement("div");
+  bob.className = "fish-bob";
+
+  const img = document.createElement("img");
+  img.className = "fish-body";
+  img.src = cfg.src || randomFishSource();
+  img.alt = "";
+
+  bob.appendChild(img);
+  fish.appendChild(bob);
+  (fishLayers[cfg.layer] || fishLayers.front).appendChild(fish);
+}
+
+fishConfigs.forEach(createFish);
+
 // sentence length control
 const lengthRanges = {
   short: { min: 20, max: 80 },

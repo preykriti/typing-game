@@ -96,7 +96,7 @@ body {
   height: clamp(200px, 46vh, 540px);
   z-index: 1;
   pointer-events: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .seabed svg {
@@ -149,6 +149,73 @@ body {
     rgba(0, 51, 68, 0.3) 45%,
     rgba(0, 17, 34, 0.72) 100%
   );
+}
+
+/* swimming fish */
+
+.fish-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fish {
+  position: absolute;
+  top: var(--top, 56%);
+  left: 0;
+  width: var(--size, 120px);
+  opacity: var(--opacity, 0.9);
+  filter: blur(var(--blur, 0px));
+  will-change: transform;
+  animation: fish-swim var(--swim, 26s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.fish-bob {
+  animation: fish-bob var(--bob, 5.5s) ease-in-out infinite;
+}
+
+.fish-body {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 8px 8px rgba(0, 17, 34, 0.35));
+}
+
+@keyframes fish-swim {
+  0% {
+    transform: translateX(-30vw) scaleX(1);
+  }
+  46% {
+    transform: translateX(108vw) scaleX(1);
+  }
+  50% {
+    transform: translateX(108vw) scaleX(-1);
+  }
+  96% {
+    transform: translateX(-30vw) scaleX(-1);
+  }
+  100% {
+    transform: translateX(-30vw) scaleX(1);
+  }
+}
+
+@keyframes fish-bob {
+  0% {
+    transform: translateY(calc(-1 * var(--amp, 34px))) rotate(0deg);
+  }
+  25% {
+    transform: translateY(0) rotate(5deg);
+  }
+  50% {
+    transform: translateY(var(--amp, 34px)) rotate(0deg);
+  }
+  75% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(calc(-1 * var(--amp, 34px))) rotate(0deg);
+  }
 }
 
 /* content */
