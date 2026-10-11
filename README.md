@@ -1,5 +1,7 @@
 # Type Portal
 
+> Live demo: [https://type-portal.netlify.app/](https://type-portal.netlify.app/)
+
 Type Portal is a browser-based typing game with an animated underwater theme. It helps you practice and measure your typing speed (WPM).
 
 ## Features
