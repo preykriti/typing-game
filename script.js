@@ -69,8 +69,10 @@ let gameAnimation = null;
 async function getParagraph(){
     try {
       const { min, max } = lengthRanges[lengthMode];
+      const apiBase =
+        location.protocol === "https:" ? "/api" : "http://api.quotable.io";
       const response = await fetch(
-        `http://api.quotable.io/random?minLength=${min}&maxLength=${max}`
+        `${apiBase}/random?minLength=${min}&maxLength=${max}`
       );
       const data = await response.json();
       return data.content;
