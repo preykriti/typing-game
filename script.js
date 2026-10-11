@@ -19,6 +19,10 @@ const lengthButtons = document.querySelectorAll(".length-btn");
 const instructionCard = document.getElementById("instruction-card");
 const gameStartBtn = document.getElementById("game-start");
 const gameOverRestart = document.getElementById("game-over-restart");
+const congratsWords = document.getElementById("congrats-words");
+const congratsMissed = document.getElementById("congrats-missed");
+const congratsRestart = document.getElementById("congrats-restart");
+const congratsNormalMode = document.getElementById("congrats-normal-mode");
 
 let quoteText = "";
 
@@ -64,6 +68,8 @@ let gameSpeed = 1;
 let currentIndex = 0;
 let wordSpawnInterval = null;
 let gameAnimation = null;
+let missedCount = 0;
+let gameActive = false;
 
 
 async function getParagraph(){
@@ -129,6 +135,15 @@ function removeFallingWord(wordObj){
     fallingWords.splice(index,1);
   }
   wordObj.element.remove();
+  checkGameCompletion();
+}
+
+function checkGameCompletion(){
+  if(!gameActive) return;
+  const allSpawned = currentIndex >= gameWords.length;
+  if(allSpawned && fallingWords.length === 0){
+    endGameWithSuccess();
+  }
 }
 
 function updateFallingWords(){
@@ -146,6 +161,7 @@ function updateFallingWords(){
     if(wordObj.y > window.innerHeight - 50){
       wordObj.hasReachedBottom = true;
       lives = lives - 1;
+      missedCount++;
       accuracy.textContent = lives;
       wordObj.element.classList.add("missed");
       setTimeout(()=>{
@@ -173,11 +189,6 @@ function checkTypedWord(){
         removeFallingWord(wordObj);
       }, 200);
 
-      if(score>=gameWords.length){
-        endGameWithSuccess();
-        return;
-      }
-
       gameSpeed +=0.1;
       break;
     }
@@ -200,14 +211,20 @@ function clearAll(){
 }
 
 function endGameWithSuccess(){
+  if(!gameActive) return;
+  gameActive = false;
   clearAll();
   textInput.disabled=true;
-  congratulationsCard.classList.remove('hidden');
   fallingWords.forEach((wordObj)=> wordObj.element.remove());
   fallingWords=[];
+  congratsWords.textContent = `${score}/${gameWords.length}`;
+  congratsMissed.textContent = missedCount;
+  congratulationsCard.classList.remove('hidden');
 }
 
 function endGameWithFailure(){
+  if(!gameActive) return;
+  gameActive = false;
   clearAll();
   textInput.disabled = true;
   gameOverCard.classList.remove("hidden");
@@ -285,6 +302,7 @@ function handleInput(e){
 }
 
 function startGameMode(){
+  gameActive = true;
   startTime = Date.now();
   timerInterval = setInterval(updateStats, 1000);
   gameLoop();
@@ -305,6 +323,8 @@ async function startTest() {
   score = 0;
   currentIndex= 0;
   gameSpeed = 1;
+  missedCount = 0;
+  gameActive = false;
 
   clearAll();
   clearFallingWords();
@@ -370,6 +390,12 @@ restart.addEventListener('click', startTest);
 resultRestart.addEventListener('click', startTest);
 gameStartBtn.addEventListener('click', startGameFromInstructions);
 gameOverRestart.addEventListener('click', startTest);
+congratsRestart.addEventListener('click', startTest);
+congratsNormalMode.addEventListener('click', () => {
+  gameMode = false;
+  setModeUI();
+  startTest();
+});
 gameModeBtn.addEventListener('click', toggleGameMode);
 
 lengthButtons.forEach((btn) => {

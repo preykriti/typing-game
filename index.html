@@ -365,7 +365,7 @@
 
       <!-- play sea wave sound -->
       <audio id="bg-sound" loop>
-        <source src="./assets/sea-waves.mp3" type="audio/mpeg" />
+        <source src="./assets/audio/sea-waves.mp3" type="audio/mpeg" />
       </audio>
       <button id="sound-btn">
         <img id="sound-icon" src="./assets/play.png" alt="speaker" />
@@ -373,6 +373,25 @@
     </div>
     <div class="congratulations-card card hidden" id="congratulations-card">
       <h2>Congratulations</h2>
+      <p class="result-message">You have completed the challenge!</p>
+      <div class="result-stats">
+        <div class="result-stat">
+          <span class="result-label">Words</span>
+          <span class="result-value"
+            ><span id="congrats-words">0/0</span> words</span
+          >
+        </div>
+        <div class="result-stat">
+          <span class="result-label">Missed</span>
+          <span class="result-value" id="congrats-missed">0</span>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button id="congrats-restart" class="result-restart-btn">Restart</button>
+        <button id="congrats-normal-mode" class="result-restart-btn">
+          Normal Mode
+        </button>
+      </div>
     </div>
     <div class="game-over-card card hidden" id="game-over-card">
       <h2>Game Over</h2>
