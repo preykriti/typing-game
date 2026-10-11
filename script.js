@@ -26,6 +26,7 @@ const congratsNormalMode = document.getElementById("congrats-normal-mode");
 const gameOverWords = document.getElementById("game-over-words");
 const gameOverMissed = document.getElementById("game-over-missed");
 const gameOverNormalMode = document.getElementById("game-over-normal-mode");
+const loadingIndicator = document.getElementById("loading-indicator");
 
 let quoteText = "";
 
@@ -102,6 +103,18 @@ function displayParagraph(par) {
     .split("")
     .map((char) => `<span>${char}</span>`)
     .join("");
+}
+
+function showLoading() {
+  loadingIndicator.classList.remove("hidden");
+  paragraph.classList.add("hidden");
+  textInput.disabled = true;
+}
+
+function hideLoading() {
+  loadingIndicator.classList.add("hidden");
+  paragraph.classList.remove("hidden");
+  textInput.disabled = false;
 }
 
 async function getGameWords() {
@@ -364,8 +377,10 @@ async function startTest() {
     textInput.classList.remove("game-mode-input");
     paragraphDisplay.classList.remove("hidden");
     accuracy.textContent = "0%";
+    showLoading();
     quoteText = await getParagraph();
     displayParagraph(quoteText);
+    hideLoading();
   }
 
   textInput.focus();
