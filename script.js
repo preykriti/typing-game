@@ -23,6 +23,9 @@ const congratsWords = document.getElementById("congrats-words");
 const congratsMissed = document.getElementById("congrats-missed");
 const congratsRestart = document.getElementById("congrats-restart");
 const congratsNormalMode = document.getElementById("congrats-normal-mode");
+const gameOverWords = document.getElementById("game-over-words");
+const gameOverMissed = document.getElementById("game-over-missed");
+const gameOverNormalMode = document.getElementById("game-over-normal-mode");
 
 let quoteText = "";
 
@@ -236,6 +239,8 @@ function endGameWithFailure(){
   gameActive = false;
   clearAll();
   textInput.disabled = true;
+  gameOverWords.textContent = `${score}/${gameWords.length}`;
+  gameOverMissed.textContent = missedCount;
   gameOverCard.classList.remove("hidden");
   fallingWords.forEach((wordObj) => wordObj.element.remove());
   fallingWords = [];
@@ -399,6 +404,11 @@ restart.addEventListener('click', startTest);
 resultRestart.addEventListener('click', startTest);
 gameStartBtn.addEventListener('click', startGameFromInstructions);
 gameOverRestart.addEventListener('click', startTest);
+gameOverNormalMode.addEventListener('click', () => {
+  gameMode = false;
+  setModeUI();
+  startTest();
+});
 congratsRestart.addEventListener('click', startTest);
 congratsNormalMode.addEventListener('click', () => {
   gameMode = false;

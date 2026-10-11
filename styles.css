@@ -490,6 +490,14 @@ button {
   color: rgb(219, 77, 77);
 }
 
+.game-over-card .result-message {
+  margin-bottom: 1rem;
+}
+
+.game-over-card .result-actions .result-restart-btn {
+  margin-top: 2.5rem;
+}
+
 .game-over-restart-btn {
   font-size: 1rem;
   font-weight: 600;

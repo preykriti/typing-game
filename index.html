@@ -397,9 +397,27 @@
     </div>
     <div class="game-over-card card hidden" id="game-over-card">
       <h2>Game Over</h2>
-      <button id="game-over-restart" class="game-over-restart-btn">
-        Restart
-      </button>
+      <p class="result-message">You ran out of lives!</p>
+      <div class="result-stats">
+        <div class="result-stat">
+          <span class="result-label">Words</span>
+          <span class="result-value"
+            ><span id="game-over-words">0/0</span> words</span
+          >
+        </div>
+        <div class="result-stat">
+          <span class="result-label">Missed</span>
+          <span class="result-value" id="game-over-missed">0</span>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button id="game-over-restart" class="result-restart-btn">
+          Restart
+        </button>
+        <button id="game-over-normal-mode" class="result-restart-btn">
+          Normal Mode
+        </button>
+      </div>
     </div>
     <div class="instruction-card card hidden" id="instruction-card">
       <h2>How to Play</h2>
