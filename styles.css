@@ -222,10 +222,12 @@ body {
 
 .title {
   margin: 8px 0;
-  color: rgb(66, 158, 219);
-  text-shadow: 2px 2px #040652;
+  color: #0b3583;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.7);
   position: sticky;
   z-index: 3;
+  font-family: inherit;
 }
 
 .top-container {
