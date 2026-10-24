@@ -345,6 +345,10 @@
               <h3 id="accuracy-text">Accuracy:</h3>
               <h3 id="accuracy">0</h3>
             </div>
+            <div class="lives-container hidden" id="lives-container">
+              <h3>Lives:</h3>
+              <div class="lives-hearts" id="lives-hearts"></div>
+            </div>
           </div>
           <div class="middle-content">
             <div id="paragraph-display" class="paragraph-display">
@@ -376,8 +380,16 @@
       <audio id="bg-sound" loop>
         <source src="./assets/audio/sea-waves.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="success-sound" src="./assets/audio/success.wav" preload="auto"></audio>
-      <audio id="missed-sound" src="./assets/audio/missed.wav" preload="auto"></audio>
+      <audio
+        id="success-sound"
+        src="./assets/audio/success.wav"
+        preload="auto"
+      ></audio>
+      <audio
+        id="missed-sound"
+        src="./assets/audio/missed.wav"
+        preload="auto"
+      ></audio>
       <button id="sound-btn">
         <img id="sound-icon" src="./assets/play.png" alt="speaker" />
       </button>
@@ -398,7 +410,9 @@
         </div>
       </div>
       <div class="result-actions">
-        <button id="congrats-restart" class="result-restart-btn">Restart</button>
+        <button id="congrats-restart" class="result-restart-btn">
+          Restart
+        </button>
         <button id="congrats-normal-mode" class="result-restart-btn">
           Normal Mode
         </button>

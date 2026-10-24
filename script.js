@@ -6,7 +6,9 @@ const accuracy = document.getElementById("accuracy");
 const restart = document.getElementById("restart");
 const gameModeBtn = document.getElementById("game-mode");
 const fallingWordsContainer = document.getElementById("falling-words");
-const accuracyText = document.getElementById("accuracy-text");
+const accuracyContainer = document.querySelector(".accuracy-container");
+const livesContainer = document.getElementById("lives-container");
+const livesHearts = document.getElementById("lives-hearts");
 const paragraphDisplay = document.getElementById("paragraph-display");
 const congratulationsCard = document.getElementById("congratulations-card");
 const gameOverCard = document.getElementById("game-over-card");
@@ -135,6 +137,20 @@ let gameAnimation = null;
 let missedCount = 0;
 let gameActive = false;
 
+const MAX_LIVES = 5;
+
+function renderLives(animateLast) {
+  livesHearts.innerHTML = "";
+  for (let i = 0; i < MAX_LIVES; i++) {
+    const heart = document.createElement("span");
+    heart.className = "heart";
+    heart.textContent = "\u2764\uFE0E";
+    if (i >= lives) heart.classList.add("lost");
+    if (animateLast && i === lives) heart.classList.add("pulse");
+    livesHearts.appendChild(heart);
+  }
+}
+
 
 async function getParagraph(){
     try {
@@ -239,7 +255,7 @@ function updateFallingWords(){
       lives = lives - 1;
       missedCount++;
       playEffect(missedSound);
-      accuracy.textContent = lives;
+      renderLives(true);
       wordObj.element.classList.add("missed");
       setTimeout(()=>{
         removeFallingWord(wordObj);
@@ -319,7 +335,6 @@ function updateStats(){
 
 
   if(gameMode){
-    accuracy.textContent = lives;
     wpm.textContent = Math.floor(score/(timeElapsed/60)) || 0;
   }
   else{
@@ -422,7 +437,7 @@ async function startTest() {
   if(gameMode){
       textInput.classList.add("game-mode-input");
       paragraphDisplay.classList.add("hidden");
-      accuracy.textContent = "5";
+      renderLives();
       gameWords = await getGameWords();
       startGameMode();
   }
@@ -443,7 +458,8 @@ async function startTest() {
 
 function setModeUI(){
   gameModeBtn.textContent = gameMode ? "Normal Mode" : "Game Mode";
-  accuracyText.innerText = gameMode ? "Lives:" : "Accuracy:";
+  accuracyContainer.classList.toggle("hidden", gameMode);
+  livesContainer.classList.toggle("hidden", !gameMode);
 }
 
 function toggleGameMode(){
