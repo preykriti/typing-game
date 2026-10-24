@@ -273,7 +273,9 @@ body {
   font-size: 1rem;
   line-height: 1;
   color: #e63946;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .heart.lost {
@@ -653,33 +655,79 @@ button {
 }
 
 .instruction-card {
-  background-color: rgba(52, 131, 167, 0.95);
-  color: white;
+  max-width: 460px;
+  padding: 2rem 2rem 1.75rem;
   text-align: left;
-  max-width: 440px;
+  color: #0f3a8a;
+  font-family: inherit;
+  background: rgba(240, 249, 255, 0.92);
+  box-shadow:
+    0 10px 28px rgba(10, 50, 90, 0.3),
+    0 5px 0 rgba(15, 58, 138, 0.35);
 }
 
 .instruction-card h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  margin: 0 0 0.75rem;
   text-align: center;
-  color:#0f3a8a
+  font-size: 1.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #0f3a8a;
 }
 
 .instruction-message {
-  margin-bottom: 1rem;
+  margin: 0 0 1.1rem;
+  text-align: center;
+  font-weight: 700;
   line-height: 1.5;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  font-family: inherit;
 }
 
 .instruction-list {
-  margin: 0 0 1.5rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  line-height: 1.4;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  counter-reset: step;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
 
+.instruction-list li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.65rem 0 0.65rem 2.2rem;
+  border-top: 1px solid rgba(15, 58, 138, 0.18);
+}
+
+.instruction-list li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.instruction-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  background: #2d5499;
+  border-radius: 6px;
+}
+
+.instruction-list strong {
+  color: #0f3a8a;
+  background: rgba(143, 205, 238, 0.55);
+  padding: 0.1em 0.6em;
+  border-radius: 4px;
+  line-height: 1.2;
+  display: inline-block;
 }
 
 .game-start-btn {
@@ -688,6 +736,10 @@ button {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.game-start-btn:hover {
+  background: #36609f;
 }
 
 .result-card {
