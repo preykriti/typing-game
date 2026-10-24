@@ -602,62 +602,9 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 500;
-  padding: 3rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 30px rgba(1, 30, 43, 0.8);
-  /* border: 2px dashed rgba(0, 17, 34, 0.8) */
-}
-
-.congratulations-card {
-  background-color: rgb(52, 131, 167);
-  color: white;
-}
-
-.congratulations-card.hidden {
-  display: none;
-}
-
-.game-over-card {
-  background: linear-gradient(160deg, #0d2949, #091b32);
-  color: white;
-  text-align: center;
-}
-
-.game-over-card h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: rgb(219, 77, 77);
-}
-
-.game-over-card .result-message {
-  margin-bottom: 1rem;
-}
-
-.game-over-card .result-actions .result-restart-btn {
-  margin-top: 2.5rem;
-}
-
-.game-over-restart-btn {
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 0.3rem;
-  background-color: #fff;
-  color: #0a2647;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease;
-}
-
-.game-over-restart-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-.instruction-card {
   max-width: 460px;
   padding: 2rem 2rem 1.75rem;
-  text-align: left;
+  border-radius: 0.5rem;
   color: #0f3a8a;
   font-family: inherit;
   background: rgba(240, 249, 255, 0.92);
@@ -666,7 +613,7 @@ button {
     0 5px 0 rgba(15, 58, 138, 0.35);
 }
 
-.instruction-card h2 {
+.card h2 {
   margin: 0 0 0.75rem;
   text-align: center;
   font-size: 1.9rem;
@@ -675,7 +622,24 @@ button {
   color: #0f3a8a;
 }
 
-.instruction-message {
+.congratulations-card {
+  text-align: center;
+}
+
+.congratulations-card.hidden {
+  display: none;
+}
+
+.game-over-card {
+  text-align: center;
+}
+
+.instruction-card {
+  text-align: left;
+}
+
+.instruction-message,
+.result-message {
   margin: 0 0 1.1rem;
   text-align: center;
   font-weight: 700;
@@ -736,6 +700,7 @@ button {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  font-family: inherit;
 }
 
 .game-start-btn:hover {
@@ -743,50 +708,57 @@ button {
 }
 
 .result-card {
-  background-color: rgb(52, 131, 167);
-  color: white;
   text-align: center;
-  max-width: 400px;
-}
-
-.result-card h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.result-message {
-  margin-bottom: 2rem;
-  line-height: 1.5;
 }
 
 .result-stats {
   display: flex;
   justify-content: space-around;
   gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(15, 58, 138, 0.18);
+  border-bottom: 1px solid rgba(15, 58, 138, 0.18);
 }
 
 .result-stat {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .result-label {
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.result-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f3a8a;
 }
 
 .result-restart-btn {
   margin-top: 1.5rem;
+  min-width: 6rem;
+  font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  border-radius: 0.3rem;
-  background-color: #fff;
-  color: rgb(52, 131, 167);
+  border-radius: 0.5rem;
+  background-color: #0b3583;
+  color: #fff;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease;
+  opacity: 0.9;
+  box-shadow: 0 5px 0 #040652;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .result-actions {
@@ -801,10 +773,7 @@ button {
 }
 
 .result-restart-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-#result-restart {
-  margin-top: 2rem;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #040652;
+  background-color: #36609f;
 }
