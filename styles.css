@@ -415,6 +415,7 @@ button {
   /* margin: 0.5rem 2rem; */
   font-size: 0.9rem;
   color: #08255a;
+  text-align: left;
 }
 
 .cloud-container {
